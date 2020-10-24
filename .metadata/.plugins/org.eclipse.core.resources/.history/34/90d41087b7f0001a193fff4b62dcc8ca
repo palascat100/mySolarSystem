@@ -1,0 +1,22 @@
+package electrictest;
+
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
+
+public class ProgressPanel extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public ProgressPanel() {
+
+	}
+	
+	@Override
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+	}
+
+}

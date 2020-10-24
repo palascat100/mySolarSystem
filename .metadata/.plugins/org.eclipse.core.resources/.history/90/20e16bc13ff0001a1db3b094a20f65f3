@@ -1,0 +1,75 @@
+package electrictest;
+
+
+import java.awt.EventQueue;
+import java.awt.Graphics;
+
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.JProgressBar;
+import javax.swing.RepaintManager;
+
+public class Progress extends JDialog
+{
+
+	private JDialog dialog= new JDialog();
+	private JPanel panel1= new JPanel();
+
+	/**
+	 * Launch the application.
+	 */
+	 
+	
+
+	/**
+	 * Create the application.
+	 */
+	public Progress() 
+	{
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() 
+	{
+	    dialog.setLocationRelativeTo(null);
+		dialog.getContentPane().add(panel1);
+		panel1.setLayout(null);
+		dialog.setSize(450,300);
+		JLabel lblNewLabel = new JLabel("Calculating...");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(111, 65, 235, 16);
+		panel1.add(lblNewLabel);
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(50, 159, 364, 20);
+		panel1.add(progressBar);
+	    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	    dialog.setVisible(true);
+	    ((JPanel) panel1).paintImmediately(0,0,450,300);
+	    RepaintManager.currentManager(panel1).markCompletelyClean(panel1);
+	   // panel1.repaint();
+	    try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+	}
+	
+	public void update()
+	{
+		
+	}
+	
+	
+	
+}

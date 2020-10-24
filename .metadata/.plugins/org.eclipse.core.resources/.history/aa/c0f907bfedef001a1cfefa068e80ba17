@@ -1,0 +1,58 @@
+package electrictest;
+
+
+import java.awt.EventQueue;
+
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
+public class Progress extends JDialog
+{
+
+	private JDialog dialog= new JDialog();
+	private JPanel panel= new JPanel();
+
+	/**
+	 * Launch the application.
+	 */
+	 public static void main(String[] args) {
+		 SwingUtilities.invokeLater(new Runnable() {
+		      public void run() {
+		    	 Progress progress= new Progress();
+		      }
+		    });
+		  }
+	
+
+	/**
+	 * Create the application.
+	 */
+	public Progress() 
+	{
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() 
+	{
+		dialog.getContentPane().add(panel);
+		panel.setLayout(null);
+		dialog.setSize(450,300);
+		JLabel lblNewLabel = new JLabel("Calculating...");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(111, 22, 235, 16);
+		panel.add(lblNewLabel);
+	    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	    dialog.setVisible(true);
+	    dialog.setLocationRelativeTo(null);
+	    dialog.repaint(1);
+	    
+	   
+	}
+}

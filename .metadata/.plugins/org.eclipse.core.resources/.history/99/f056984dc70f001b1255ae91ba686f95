@@ -1,0 +1,118 @@
+package electrictest;
+
+import javax.swing.ImageIcon;  
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.ButtonGroup;
+ 
+public class ChargesBasic extends JButton 
+{
+	/**
+	 * This is the class that creates the charges for the main screen
+	 */
+	/**
+	 * Declaration of variables
+	 */
+	private JFrame frame1;
+	private RealPanelBasic panel1;
+	int screenWidth,screenHeight;
+	double num1;
+	double[] data;
+	double[] dataloc;
+	ElectricFieldBasic elec;
+	InfoExBasic infoex;
+	ImageIcon icon= new ImageIcon(this.getClass().getResource("/negativeFixed.png"));
+	ChargesBasic charge=this;
+	/**
+	 * Create the application.
+	 */
+	public ChargesBasic(JFrame frame, RealPanelBasic panel,double num, ElectricFieldBasic electric,InfoExBasic ex,double track) 
+	{
+		
+		frame1=frame;
+		panel1=panel;
+		/**
+		 * When clicking the charges creates a dialog that allows you to change their characteristics
+		 */
+		addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				ex.setrepaint(0);
+				panel1.setRepaint(0);
+				RealDialogBasic dialog= new RealDialogBasic(frame1,num1,charge,data,infoex);
+				
+			}
+		});
+		num1=num;
+		infoex=ex;
+		ArrayList<Double> list= new ArrayList<Double>();
+		elec=electric;
+		list=infoex.getInfo2();
+		data= new double[4];
+		dataloc= new double[3];
+		dataloc[2]=num1;
+		if(track==1)
+		{
+		this.setBounds(245, 231, 24, 24);
+		data[0]=1.0;
+		data[1]=1.0;
+		data[2]=num1;
+		data[3]=2.0;
+		dataloc[0]=245+(this.getWidth()>>1);
+		dataloc[1]=231+(this.getHeight()>>1);
+		infoex.getCRN(data);
+		infoex.getLoc(dataloc);
+		this.setIcon(new ImageIcon(this.getClass().getResource("/positiveFixed.png")));
+		charge.setBorderPainted(false);
+		 charge.setContentAreaFilled(false);
+	     charge.setFocusPainted(false);
+		 charge.setOpaque(false);
+	    }
+		else
+		{
+			data[0]=list.get((int)((num1-1)*2));
+			data[1]=list.get((int)((num1-1)*2+1));
+			data[2]=num1;
+			data[3]=2.0;
+		}
+		charge.setBorderPainted(false);
+		 charge.setContentAreaFilled(false);
+	     charge.setFocusPainted(false);
+	     charge.setOpaque(false);
+	}
+
+	/**
+	 * After modification allows the charge to get its new stats and modify itself to fit those stats
+	 */
+	public void getStats(double[] array)
+	{
+		data=array;
+		if(data[0]==-1000 && data[1]==-1000)
+		{
+			infoex.remove(data);
+			infoex.removeLoc(dataloc);
+			elec.setnum(true);
+			elec.redoCharges();
+			panel1.remove(this);
+			panel1.repaint();
+		}
+		else
+		{
+			panel1.setRepaint(1);
+			infoex.modify(data);
+			dataloc[0]=this.getX()+this.getWidth()/2;
+			dataloc[1]=this.getY()+this.getHeight()/2;
+			infoex.modifyloc(dataloc);	
+			elec.redoCharges();
+		}
+		
+	}
+}
+	

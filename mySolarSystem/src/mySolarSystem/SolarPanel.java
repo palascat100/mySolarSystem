@@ -74,7 +74,7 @@ public class SolarPanel extends JPanel {
 				for(n=0;n<numBodies;n++)
 				{
 					getColor(n,g2d);
-					g2d.drawLine((int)Math.floor(position.get((num+n)*2))+400, (int)Math.floor(position.get((num+n)*2+1))+200, (int)Math.floor(position.get((num+n)*2+4))+400, (int)Math.floor(position.get((num+n)*2+5))+200);
+					g2d.drawLine((int)Math.floor(position.get((num+n)*2))+400, (int)Math.floor(position.get((num+n)*2+1))+200, (int)Math.floor(position.get((num+n)*2+numBodies*2))+400, (int)Math.floor(position.get((num+n)*2+numBodies*2+1))+200);
 				}
 			
 			try {
@@ -84,7 +84,7 @@ public class SolarPanel extends JPanel {
 				e.printStackTrace();
 			}
 		
-			num+=2;
+			num+=numBodies;
 			m.checkNum();
 		}
 	}
